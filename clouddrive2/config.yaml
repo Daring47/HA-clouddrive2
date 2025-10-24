@@ -1,0 +1,24 @@
+name: "CloudDrive2 (RK3566)"
+version: "1.0.0"
+slug: "clouddrive2-rk3566"
+description: "适配冬瓜盒子(RK3566)的CloudDrive2加载项"
+arch:
+  - aarch64  # 仅保留ARM64架构（适配RK3566）
+url: "https://github.com/cloudrive2/cloudrive2"
+startup: "application"
+boot: "auto"
+options:
+  port: 19798
+  log_level: "info"
+  data_dir: "/share/clouddrive2"  # HAOS的/share目录用于持久化数据
+schema:
+  port: int(1024-65535)
+  log_level: str
+  data_dir: str
+ports:
+  19798/tcp: 19798  # 端口映射，供本地访问管理界面
+volumes:
+  - "/share/clouddrive2:/app/data"  # 数据持久化到HAOS的/share
+environment:
+  - "LOG_LEVEL={{ log_level }}"
+privileged: false  # 初期关闭，有需要再开启

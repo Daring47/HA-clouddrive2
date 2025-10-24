@@ -1,0 +1,40 @@
+{
+    "name": "CloudDrive2 (RK3566)",
+    "version": "1.0.0",
+    "slug": "clouddrive2-rk3566",
+    "description": "适配冬瓜盒子(RK3566)的CloudDrive2加载项",
+    "arch": [
+        "aarch64"
+    ],
+    "url": "https://github.com/your-repo/clouddrive2-ha-addon",
+    "startup": "application",
+    "boot": "auto",
+    "options": {
+        "port": 19798,
+        "log_level": "info",
+        "data_dir": "/share/clouddrive2"
+    },
+    "schema": {
+        "port": {
+            "type": "integer",
+            "minimum": 1024,
+            "maximum": 65535
+        },
+        "log_level": {
+            "type": "string"
+        },
+        "data_dir": {
+            "type": "string"
+        }
+    },
+    "ports": {
+        "19798/tcp": 19798
+    },
+    "volumes": [
+        "/share/clouddrive2:/app/data"
+    ],
+    "environment": [
+        "LOG_LEVEL={{ log_level }}"
+    ],
+    "privileged": false
+}
