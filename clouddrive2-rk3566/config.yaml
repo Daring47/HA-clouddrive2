@@ -12,7 +12,7 @@ options:
   log_level: "info"
   data_dir: "/share/clouddrive2"  # HAOS的/share目录用于持久化数据
 schema:
-  port: int(1024-65535)
+  port: int(1024,65535)  # 正确格式（min,max 用逗号分隔）
   log_level: str
   data_dir: str
 ports:
@@ -22,3 +22,4 @@ volumes:
 environment:
   - "LOG_LEVEL={{ log_level }}"
 privileged: false  # 初期关闭，有需要再开启
+
