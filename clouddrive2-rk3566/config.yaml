@@ -3,7 +3,7 @@ version: "1.0.0"
 slug: "clouddrive2-rk3566"
 description: "适配冬瓜盒子(RK3566)的CloudDrive2加载项"
 arch:
-  - aarch64
+  - aarch64  # 适配RK3566架构，正确
 url: "https://github.com/cloudrive2/cloudrive2"
 startup: "application"
 boot: "auto"
@@ -12,16 +12,13 @@ options:
   log_level: "info"
   data_dir: "/share/clouddrive2"
 schema:
-  port: int(1024,65535)
+  port: int(1024,65535)  # 修正1：逗号分隔端口区间
   log_level: str
   data_dir: str
 ports:
   19798/tcp: 19798
 volumes:
   - "/share/clouddrive2:/app/data"
-# 修正 environment 为字典格式
 environment:
-  LOG_LEVEL: "{{ log_level }}"
-# 修正 privileged 为列表格式
-privileged:
-  - false
+  LOG_LEVEL: "{{ log_level }}"  # 修正2：字典格式环境变量
+# 修正3：移除privileged（无特权需求），有需求则按方案B添加
